@@ -1,0 +1,23 @@
+{
+  "name": "ibot",
+  "version": "1.0.0",
+  "description": "Imaginage discord bot",
+  "main": "ibot.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/themsxr/ibot_discord_bot.git"
+  },
+  "author": "Michal Sadzewicz",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/themsxr/ibot_discord_bot/issues"
+  },
+  "homepage": "https://github.com/themsxr/ibot_discord_bot#readme",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0"
+  }
+}
