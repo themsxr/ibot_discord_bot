@@ -1,7 +1,3 @@
-/**
- * Example Event
- */
-
 module.exports = {
     name: 'guildMemberAdd',
 

@@ -44,10 +44,10 @@ client.on("messageCreate", message => {
     var xp, xpadd, needxp, level;
     var mysql = require('mysql');
     var connection = mysql.createConnection({
-        host     : '51.68.137.90',
+        host     : 'localhost',
         port  : 3306,
-        user     : 'eddy',
-        password : 'TheYellowDik1!',
+        user     : '?',
+        password : '?',
         database : 'discord'
     });
     connection.connect();
