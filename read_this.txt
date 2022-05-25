@@ -1,0 +1,7 @@
+There's directory users_profile
+there with !verify command will be created json file with userid filename
+and this file has
+{
+    "bg": "bg0", <--- what background in userid
+    "bgs": ["bg1", "bg5"] <--- array with what background you own (what you bought in store)
+}

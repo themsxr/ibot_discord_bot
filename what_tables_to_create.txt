@@ -1,0 +1,14 @@
+Put there what new tables will be there
+
+like exists tables:
+
+# userID, uVerifed, uLevel, uBitcoin, uPremium, uXp, uWarns
+USERS (
+    userID BIGINT NOT NULL,
+    uVerifed INT DEFAULT 0,
+    uLevel INT DEFAULT 0,
+    uBitcoin INT DEFAULT 0,
+    uPremium INT DEFAULT 0,
+    uXp BIGINT DEFAULT 1,
+    uWarns INT DEFAULT 0
+);
