@@ -8,13 +8,15 @@ module.exports = {
         if(!args[0]) return message.reply("Please provide verification code first.").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
           }).catch(err => console.error(err));
+        const usrcode = args[0].toUpperCase();
         fs.readFile('./codes.txt', function (err, data) {
             if (err) throw err;
-            if(data.includes(`${args[0]}`)){
+            if(data.includes(`${usrcode}`)){
                 var mysql      = require('mysql');
                 var connection = mysql.createConnection({
                   host     : '51.68.137.90',
-                  user     : 'bob',
+                  port  : 3306,
+                  user     : 'eddy',
                   password : 'TheYellowDik1!',
                   database : 'discord'
                 });
