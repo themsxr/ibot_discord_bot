@@ -1,4 +1,7 @@
 var fs = require('fs');
+const { NULL } = require('mysql/lib/protocol/constants/types');
+let profile_db = require("../../localdbs/profile_usrs.json");
+
 module.exports = {
     name: "verify",
     category: "General",
@@ -14,10 +17,10 @@ module.exports = {
             if(data.includes(`${usrcode}`)){
                 var mysql      = require('mysql');
                 var connection = mysql.createConnection({
-                  host     : 'localhost',
+                  host     : '51.68.137.90',
                   port  : 3306,
-                  user     : '?',
-                  password : '?',
+                  user     : 'eddy',
+                  password : 'TheYellowDik1!',
                   database : 'discord'
                 });
                 connection.connect();
@@ -32,6 +35,24 @@ module.exports = {
                         connection.end();
                         let role = message.guild.roles.cache.find(role => role.name === 'User')
                         message.member.roles.add(role)
+                        if(!profile_db[message.author.id])
+                        {
+                            profile_db[message.author.id] = [
+                                {
+                                    bg: "bg0",
+                                    bgs: ["bg0"],
+                                    ach: []
+                                }
+                            ]
+                            fs.writeFile("./localdbs/profile_usrs.json", JSON.stringify(profile_db), (err) => {
+                                if (err) {
+                                    message.reply("ERROR, Contact with our Discord Moderator!").then(repliedMessage => {
+                                        setTimeout(() => repliedMessage.delete(), 5000);
+                                      }).catch(err => console.error(err));
+                                    return console.log(err);
+                                }
+                            });
+                        }
                         return message.reply("Your account has been successfully verified.").then(repliedMessage => {
                             setTimeout(() => repliedMessage.delete(), 5000);
                           }).catch(err => console.error(err));

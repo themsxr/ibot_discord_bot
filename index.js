@@ -41,13 +41,14 @@ process.on("unhandledRejection", (reason, promise) => {
 
 client.on("messageCreate", message => {
     if (message.author.bot) return 0;
+    if(message.channel.name.includes("verify")) return 0;
     var xp, xpadd, needxp, level;
     var mysql = require('mysql');
     var connection = mysql.createConnection({
-        host     : 'localhost',
+        host     : '51.68.137.90',
         port  : 3306,
-        user     : '?',
-        password : '?',
+        user     : 'eddy',
+        password : 'TheYellowDik1!',
         database : 'discord'
     });
     connection.connect();
