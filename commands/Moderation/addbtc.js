@@ -23,7 +23,7 @@ module.exports = {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
-        if(!amount || isNaN(amount) || amount < 0 || amount > 999) return message.reply("You must enter the value to add (ONLY NUMBERS GREATER THAN 0).").then(repliedMessage => {
+        if(!amount || isNaN(amount) || amount == 0 || amount < 0 || amount > 999) return message.reply("You must enter the value to add (ONLY NUMBERS GREATER THAN 0).").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
@@ -60,6 +60,10 @@ module.exports = {
                 connection.query(sqladd, function (err, result) {
                     if (err) throw err;
                 });
+
+            message.reply(`Added **${amount} BTC** to ${user}`).then(repliedMessage => {
+                setTimeout(() => repliedMessage.delete(), 5000);
+            }).catch(err => console.error(err));
 
             connection.end();
         });
