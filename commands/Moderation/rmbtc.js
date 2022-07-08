@@ -8,11 +8,18 @@ module.exports = {
         const user = message.mentions.members.first();
         const amount = args[1];
 
+        if(!args[0]) return message.reply("You need to mention user first.").then(repliedMessage => {
+            setTimeout(() => repliedMessage.delete(), 5000);
+        }).catch(err => console.error(err));
+        if(!args[1]) return message.reply("You need to add specific amount to remove.").then(repliedMessage => {
+            setTimeout(() => repliedMessage.delete(), 5000);
+        }).catch(err => console.error(err));
+
         if(user.id == client.user.id) return message.reply("You can't remove Bitcoins from BOT.").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
-        if(!user) return message.reply("You need to mention someone first.").then(repliedMessage => {
+        if(!user) return message.reply("I can't find this user.").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 

@@ -39,6 +39,6 @@ module.exports = {
         let bchannel = guild.channels.cache.get('987140467542073394');
         bchannel.send({embeds: [embed]});
 
-        await user.ban(reason);
+        await user.ban({reason: reason});
     }
 }
