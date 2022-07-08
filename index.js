@@ -44,8 +44,8 @@ client.on("messageCreate", message => {
     var xp, xpadd, needxp, level;
     var mysql = require('mysql');
     var connection = mysql.createConnection({
-        host     : '51.68.137.90',
-        user     : 'sammy',
+        host     : 'localhost',
+        user     : 'eddy',
         password : 'TheYellowDik1!',
         database : 'discord'
     });
