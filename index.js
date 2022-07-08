@@ -1,7 +1,6 @@
 const { Client, Collection, Intents } = require('discord.js');
 const handler = require("./handler/index");
 const { token } = require("./config.json");
-const { createCanvas, loadImage } = require('canvas');
 
 const client = new Client({
     intents: [
@@ -46,8 +45,7 @@ client.on("messageCreate", message => {
     var mysql = require('mysql');
     var connection = mysql.createConnection({
         host     : '51.68.137.90',
-        port  : 3306,
-        user     : 'eddy',
+        user     : 'sammy',
         password : 'TheYellowDik1!',
         database : 'discord'
     });
@@ -69,7 +67,6 @@ client.on("messageCreate", message => {
             }
             if (xp >= needxp)
             {
-                // level up image
                 level = parseInt(level + 1);
                 var sql3 = `UPDATE USERS SET uLevel=${level} WHERE userID=${message.author.id}`;
                 connection.query(sql3, function (err, result) {

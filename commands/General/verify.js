@@ -4,10 +4,11 @@ let profile_db = require("../../localdbs/profile_usrs.json");
 
 module.exports = {
     name: "verify",
-    category: "General",
-    description: "Verify your account",
     ownerOnly: false,
     run: async (client, message, args) => {
+        if(!message.channel.name.includes("verify")) return message.reply("You can't use verify command in this channel.").then(repliedMessage => {
+            setTimeout(() => repliedMessage.delete(), 5000);
+        }).catch(err => console.error);
         if(!args[0]) return message.reply("Please provide verification code first.").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
           }).catch(err => console.error(err));
@@ -18,8 +19,7 @@ module.exports = {
                 var mysql      = require('mysql');
                 var connection = mysql.createConnection({
                   host     : '51.68.137.90',
-                  port  : 3306,
-                  user     : 'eddy',
+                  user     : 'sammy',
                   password : 'TheYellowDik1!',
                   database : 'discord'
                 });
@@ -37,13 +37,13 @@ module.exports = {
                         message.member.roles.add(role)
                         if(!profile_db[message.author.id])
                         {
-                            profile_db[message.author.id] = [
-                                {
+                            profile_db[message.author.id] = {
+                                
                                     bg: "bg0",
                                     bgs: ["bg0"],
                                     ach: []
-                                }
-                            ]
+                            }
+                            
                             fs.writeFile("./localdbs/profile_usrs.json", JSON.stringify(profile_db), (err) => {
                                 if (err) {
                                     message.reply("ERROR, Contact with our Discord Moderator!").then(repliedMessage => {
