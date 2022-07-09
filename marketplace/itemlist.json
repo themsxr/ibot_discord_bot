@@ -1,0 +1,171 @@
+{
+    "CPU": 
+    {
+        "1001":
+        {
+            "NAME": "Intel Pentium G440",
+            "PRESTIGE": 0,
+            "LEVEL": 5,
+            "PRICE": 0.0049
+        },
+        "1009":
+        {
+            "NAME": "i9-12900K",
+            "PRESTIGE": 0,
+            "LEVEL": 5,
+            "PRICE": 0.0030
+        },
+        "1010":
+        {
+            "NAME": "Xeon 8280",
+            "PRESTIGE": 0,
+            "LEVEL": 5,
+            "PRICE": 0.0059
+        }
+    },
+    "GPU":
+    {
+        "1003":
+        {
+            "NAME": "RX 6600XT",
+            "WATT": 200,
+            "PRESTIGE": 0,
+            "LEVEL": 5,
+            "PRICE": 0.016
+        },
+        "1015":
+        {
+            "NAME": "Quadro RTX 8000",
+            "WATT": 160,
+            "PRESTIGE": 0,
+            "LEVEL": 15,
+            "PRICE": 0.25
+        },
+        "1016":
+        {
+            "NAME": "RX 6800 XT",
+            "WATT": 190,
+            "PRESTIGE": 0,
+            "LEVEL": 30,
+            "PRICE": 0.039
+        },
+        "1018":
+        {
+            "NAME": "RTX A4000",
+            "WATT": 140,
+            "PRESTIGE": 0,
+            "LEVEL": 50,
+            "PRICE": 0.069
+        },
+        "1017":
+        {
+            "NAME": "RTX 3060 Ti",
+            "WATT": 130,
+            "PRESTIGE": 1,
+            "LEVEL": 15,
+            "PRICE": 0.040
+        },
+        "1019":
+        {
+            "NAME": "RTX 3090 Ti",
+            "WATT": 350,
+            "PRESTIGE": 1,
+            "LEVEL": 50,
+            "PRICE": 0.12
+        },
+        "1020":
+        {
+            "NAME": "Tesla A100",
+            "WATT": 390,
+            "PRESTIGE": 2,
+            "LEVEL": 30,
+            "PRICE": 0.74
+        }
+    },
+    "RAM":
+    {
+        "1002":
+        {
+            "NAME": "8GB DDR4",
+            "PRESTIGE": 0,
+            "LEVEL": 5,
+            "PRICE": 0.0020
+        },
+        "1007":
+        {
+            "NAME": "16GB DDR4",
+            "PRESTIGE": 0,
+            "LEVEL": 5,
+            "PRICE": 0.0030
+        },
+        "1008":
+        {
+            "NAME": "32GB DDR4",
+            "PRESTIGE": 0,
+            "LEVEL": 5,
+            "PRICE": 0.0059
+        }
+    },
+    "POWER":
+    {
+        "1011":
+        {
+            "NAME": "ATX BRONZE",
+            "POWER": 450,
+            "PRESTIGE": 0,
+            "LEVEL": 5,
+            "PRICE": 0.0025
+        },
+        "1012":
+        {
+            "NAME": "ATX SILVER",
+            "POWER": 600,
+            "PRESTIGE": 0,
+            "LEVEL": 30,
+            "PRICE": 0.0044
+        },
+        "1013":
+        {
+            "NAME": "ATX GOLD",
+            "POWER": 850,
+            "PRESTIGE": 0,
+            "LEVEL": 50,
+            "PRICE": 0.0054
+        },
+        "1014":
+        {
+            "NAME": "ATX PLATINUM",
+            "POWER": 1600,
+            "PRESTIGE": 1,
+            "LEVEL": 50,
+            "PRICE": 0.012
+        }
+    },
+    "MOTHERBOARD":
+    {
+        "1004":
+        {
+            "NAME": "Q270 Pr",
+            "SLOTS": 1,
+            "PRESTIGE": 0,
+            "LEVEL": 5,
+            "PRICE": 0.010
+        },
+        "1005":
+        {
+            "NAME": "H510 Pro",
+            "SLOTS": 6,
+            "PRESTIGE": 0,
+            "LEVEL": 30,
+            "PRICE": 0.010
+        },
+        "1006":
+        {
+            "NAME": "B250",
+            "SLOTS": 12,
+            "PRESTIGE": 0,
+            "LEVEL": 50,
+            "PRICE": 0.0063
+        }
+    }
+}
