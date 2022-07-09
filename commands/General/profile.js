@@ -28,7 +28,9 @@ module.exports = {
 
         connection.query(sql, async function (err, result) {
 
+            const prestige = result[0].uPrestige;
             const level = result[0].uLevel;
+            const usds = parseFloat(result[0].uUSD).toFixed(2);
             const btcs = parseFloat(result[0].uBitcoin).toFixed(8);
             const username = user.user.username;
 
@@ -45,11 +47,23 @@ module.exports = {
             
             ctx.drawImage(backgroundimage, 0, 0, canvas.width, canvas.height)
 
+            // User Prestige
+            ctx.font = '41px sans-serif'
+            ctx.textAlign = 'left'
+            ctx.fillStyle = `${tcolor}`
+            ctx.fillText(prestige, 170, 323)
+
             // User Level
             ctx.font = '41px sans-serif'
             ctx.textAlign = 'left'
             ctx.fillStyle = `${tcolor}`
-            ctx.fillText(level, 140, 369)
+            ctx.fillText(level, 130, 369)
+
+            // User USDs
+            ctx.font = '41px sans-serif'
+            ctx.textAlign = 'left'
+            ctx.fillStyle = `${tcolor}`
+            ctx.fillText(usds, 100, 494)
 
             // User BTCs
             ctx.font = '41px sans-serif'

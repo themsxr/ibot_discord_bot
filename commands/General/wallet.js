@@ -3,7 +3,7 @@ module.exports = {
     ownerOnly: false,
     run: async (client, message, args) => {
 
-        var btcs;
+        var btcs, usds;
 
         const user = message.mentions.members.first() || message.member;
         if(!user || user.id == client.user.id) return message.reply("I can't show you wallet of this user.").then(repliedMessage => {
@@ -24,8 +24,9 @@ module.exports = {
             if(err) throw err;
 
             btcs = result[0].uBitcoin;
+            usds = result[0].uUSD;
 
-            message.reply(`User: **${user.user.tag}** has **${parseFloat(btcs).toFixed(8)} BTC**`);
+            message.reply(`User: **${user.user.tag}** has:\n\`${parseFloat(usds).toFixed(2)} USD\`\n\`${parseFloat(btcs).toFixed(8)} BTC\``);
 
             connection.end();
         });

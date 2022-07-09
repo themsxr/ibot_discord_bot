@@ -1,7 +1,7 @@
 const { readdirSync } = require("fs");
 
 module.exports = {
-    name: "addbtc",
+    name: "addusd",
     ownerOnly: false,
     run: async (client, message, args) => {
 
@@ -15,7 +15,7 @@ module.exports = {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
-        if(user.id == client.user.id) return message.reply("You can't add Bitcoins to BOT.").then(repliedMessage => {
+        if(user.id == client.user.id) return message.reply("You can't add USD to BOT.").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
@@ -23,7 +23,7 @@ module.exports = {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
-        if(!amount || isNaN(amount) || amount == 0 || amount < 0 || amount > 999) return message.reply("You must enter the value to add (ONLY NUMBERS BETWEEN 0 AND 999).").then(repliedMessage => {
+        if(!amount || isNaN(amount) || amount == 0 || amount < 0 || amount > 100000000) return message.reply("You must enter the value to add (ONLY NUMBERS BETWEEN 0 AND 100000000).").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
@@ -49,19 +49,19 @@ module.exports = {
                 setTimeout(() => repliedMessage.delete(), 5000);
             }).catch(err => console.error(err));
             
-            var btc, addbtc;
+            var usd, addusd;
 
-            btc = result[0].uBitcoin;
-            addbtc = parseFloat(btc) + parseFloat(amount);
+            usd = result[0].uUSD;
+            addusd = parseFloat(usd) + parseFloat(amount);
 
-            if(addbtc > 1000) addbtc = 999.99999999;
+            if(addusd > 100000000) addusd = 99999999.99;
 
-            var sqladd = `UPDATE USERS SET uBitcoin=${addbtc} WHERE userID=${user.id}`;
+            var sqladd = `UPDATE USERS SET uUSD=${addusd} WHERE userID=${user.id}`;
                 connection.query(sqladd, function (err, result) {
                     if (err) throw err;
                 });
 
-            message.reply(`Added **${amount} BTC** to ${user}`).then(repliedMessage => {
+            message.reply(`Added **${amount} USD** to ${user}`).then(repliedMessage => {
                 setTimeout(() => repliedMessage.delete(), 5000);
             }).catch(err => console.error(err));
 

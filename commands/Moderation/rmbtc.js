@@ -23,11 +23,11 @@ module.exports = {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
-        if(!amount || isNaN(amount) || amount == 0 || amount < 0 || amount > 999) return message.reply("You must enter the value to remove (ONLY NUMBERS GREATER THAN 0).").then(repliedMessage => {
+        if(!amount || isNaN(amount) || amount == 0 || amount < 0 || amount > 999) return message.reply("You must enter the value to remove (ONLY NUMBERS BETWEEN 0 AND 999).").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
-        if (!message.member.permissions.has("BAN_MEMBERS")) {
+        if (!message.member.permissions.has("KICK_MEMBERS")) {
             return message.reply("You don't have permissions.").then(repliedMessage => {
                 setTimeout(() => repliedMessage.delete(), 5000);
             }).catch(err => console.error(err));
