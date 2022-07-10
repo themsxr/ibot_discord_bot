@@ -1,4 +1,4 @@
-const { Client, Collection, Intents } = require('discord.js');
+const { Client, Collection, Intents, MessageEmbed } = require('discord.js');
 const handler = require("./handler/index");
 const { token } = require("./config.json");
 
@@ -36,6 +36,56 @@ process.on("uncaughtException", (err) => {
 });
 process.on("unhandledRejection", (reason, promise) => {
     console.log("[FATAL] Possibly Unhandled Rejection at: Promise ", promise, " reason: ", reason.message);
+});
+
+
+client.on("ready", (client) => {
+    setInterval(() => {
+        setTimeout(function () {
+            require('child_process').fork('./btc.js');
+        }, 299000);
+
+        var mysql = require('mysql');
+        var connection = mysql.createConnection({
+            host     : 'localhost',
+            user     : 'eddy',
+            password : 'TheYellowDik1!',
+            database : 'discord'
+        });
+        connection.connect();
+
+        var sql = `SELECT * FROM BITCOIN WHERE ID=1`;
+
+        connection.query(sql, function (err, result) {
+            if (err) throw err;
+
+            var cprice = result[0].CPRICE;
+            var proc = result[0].PROC;
+            var ltyp = result[0].LTYP;
+            var ltyp_s;
+
+            if (ltyp == 0)
+            {
+                ltyp_s = "+";
+            }
+            else {
+                ltyp_s = "-";
+            }
+
+            const guild = client.guilds.cache.get('853046031843065856');
+            let btcchannel = guild.channels.cache.get('995736926348902401');
+
+            const embed = new MessageEmbed()
+                .setTitle("Current BTC Price")
+                .setColor("#FFFFFF")
+                .setDescription(`\`\`\`yaml\n1 BTC = ${parseFloat(cprice).toFixed(2)}\`\`\`\n\`\`\`fix\n${ltyp_s} ${parseFloat(proc).toFixed(8)}%\`\`\``)
+                .setTimestamp();
+
+            btcchannel.send({embeds: [embed]});
+            connection.end();
+        });
+
+    }, 300000);
 });
 
 client.on("messageCreate", message => {
