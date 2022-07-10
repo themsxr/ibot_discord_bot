@@ -23,7 +23,7 @@ module.exports = {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
-        if(!amount || isNaN(amount) || amount < 0 || amount > 100000000) return message.reply("You must enter the value to transfer (ONLY NUMBERS BETWEEN 0 AND 100000000).").then(repliedMessage => {
+        if(!amount || isNaN(amount) || amount < 0 || amount > 100000000) return message.reply("You must enter the value to transfer (ONLY NUMBERS BETWEEN 1 AND 99999999.99).").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
