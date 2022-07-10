@@ -1,17 +1,17 @@
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-    name: "buybtc",
+    name: "sellbtc",
     ownerOnly: false,
     run: async (client, message, args) => {
 
         const amount = args[0];
 
-        if(!args[0]) return message.reply("You need to add specific amount of USD.").then(repliedMessage => {
+        if(!args[0]) return message.reply("You need to add specific amount of BTC.").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
-        if(!amount || isNaN(amount) || amount < 0.01 || amount > 999.99999999) return message.reply("You need to enter specific amount of USD (ONLY NUMBERS BETWEEN 0.01 AND 99999999.99).").then(repliedMessage => {
+        if(!amount || isNaN(amount) || amount < 0.00000001 || amount > 999.99999999) return message.reply("You need to enter specific amount of BTC (ONLY NUMBERS BETWEEN 0.00000001 AND 99999999.99).").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
@@ -24,7 +24,7 @@ module.exports = {
         });
         connection.connect();
 
-        var btcprice, btcs, usds, usdtobtc, addbtc, rmusd;
+        var btcprice, btcs, usds, btctousd, addusd, rmbtc;
         var sql = `SELECT * FROM USERS WHERE userID=${message.author.id}`;
         var sql2 = `SELECT * FROM BITCOIN WHERE ID=1`;
 
@@ -34,7 +34,7 @@ module.exports = {
             btcs = result[0].uBitcoin;
             usds = result[0].uUSD;
 
-            if (usds < amount) return message.reply("You entered more USD than you have.").then(repliedMessage => {
+            if (btcs < amount) return message.reply("You entered more BTC than you have.").then(repliedMessage => {
                 setTimeout(() => repliedMessage.delete(), 5000);
             }).catch(err => console.error(err));
 
@@ -42,20 +42,20 @@ module.exports = {
                 if (err) throw err;
 
                 btcprice = res[0].CPRICE;
-                usdtobtc = parseFloat(amount * 1) / parseFloat(btcprice);
-                addbtc = parseFloat(btcs) + parseFloat(usdtobtc);
+                btctousd = (parseFloat(amount) * parseFloat(btcprice)) / 1;
+                addusd = parseFloat(usds) + parseFloat(btctousd);
 
-                if (addbtc > 999.99999999) addbtc = 999.99999999;
+                if (addusd > 99999999.99) addusd = 99999999.99;
 
-                rmusd = parseFloat(usds) - parseFloat(amount);
+                rmbtc = parseFloat(btcs) - parseFloat(amount);
 
-                var sqlup = `UPDATE USERS SET uBitcoin=${addbtc}, uUSD=${rmusd} WHERE userID=${message.author.id}`;
+                var sqlup = `UPDATE USERS SET uBitcoin=${rmbtc}, uUSD=${addusd} WHERE userID=${message.author.id}`;
 
                 connection.query(sqlup, function (err, res) {
                     if (err) throw err;
                 });
 
-                const embed = new MessageEmbed().setColor("#FFFFFF").setDescription(`You bought \`${parseFloat(usdtobtc).toFixed(8)} BTC\` for \`${parseFloat(amount).toFixed(2)} USD\``).addField(`BTC Price when buying:`, `\`\`\`yaml\n1 BTC = ${parseFloat(btcprice).toFixed(2)} USD\`\`\``)
+                const embed = new MessageEmbed().setColor("#FFFFFF").setDescription(`You've sold \`${parseFloat(amount).toFixed(8)} BTC\` for \`${parseFloat(btctousd).toFixed(2)} USD\``).addField(`BTC Price when selling:`, `\`\`\`yaml\n1 BTC = ${parseFloat(btcprice).toFixed(2)} USD\`\`\``)
     
                 message.channel.send({embeds: [embed]});
                 connection.end();

@@ -1,3 +1,5 @@
+const { MessageEmbed } = require('discord.js');
+
 module.exports = {
     name: "wallet",
     ownerOnly: false,
@@ -26,7 +28,9 @@ module.exports = {
             btcs = result[0].uBitcoin;
             usds = result[0].uUSD;
 
-            message.reply(`User: **${user.user.tag}** has:\n\`${parseFloat(usds).toFixed(2)} USD\`\n\`${parseFloat(btcs).toFixed(8)} BTC\``);
+            const embed = new MessageEmbed().setDescription(`**[${user.user.tag} wallet](https://discordapp.com/users/${user.id}/)**`).setColor("#FFFFFF").addField("BTC:", `\`\`\`yaml\n${parseFloat(btcs).toFixed(8)}\`\`\``, true).addField("USD:", `\`\`\`yaml\n${parseFloat(usds).toFixed(2)}\`\`\``, true);
+    
+            message.channel.send({embeds: [embed]});
 
             connection.end();
         });

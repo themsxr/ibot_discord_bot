@@ -1,3 +1,5 @@
+const { MessageEmbed } = require('discord.js');
+
 module.exports = {
     name: "transferusd",
     ownerOnly: false,
@@ -18,12 +20,16 @@ module.exports = {
         if(user.id == client.user.id) return message.reply("You can't transfer USD to BOT.").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
+        
+        if(user.id == message.author.id) return message.reply("You can't transfer USD to yourself.").then(repliedMessage => {
+            setTimeout(() => repliedMessage.delete(), 5000);
+        }).catch(err => console.error(err));
 
         if(!user) return message.reply("I can't find this user.").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
-        if(!amount || isNaN(amount) || amount < 0 || amount > 100000000) return message.reply("You must enter the value to transfer (ONLY NUMBERS BETWEEN 1 AND 99999999.99).").then(repliedMessage => {
+        if(!amount || isNaN(amount) || amount < 0.01 || amount > 99999999.99) return message.reply("You must enter the value to transfer (ONLY NUMBERS BETWEEN 0.01 AND 99999999.99).").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
@@ -63,7 +69,7 @@ module.exports = {
                 chkusd = parseFloat(userusds) + parseFloat(authorusds);
                 tormusd = parseFloat(authorusds) - parseFloat(amount);
                 
-                if(chkusd > 100000000) 
+                if(chkusd > 99999999.99) 
                 {
                     usdsadd = 99999999.99;
                 }
@@ -81,10 +87,11 @@ module.exports = {
                     if (err) throw err;
                 });
 
-                message.reply(`Transfered **${amount} USD** to **${user}**`)
+                const embed = new MessageEmbed().setDescription(`**[\nTransfered \`\`\`yaml\n${parseFloat(amount).toFixed(2)} USD\`\`\` to ${user.user.tag}](https://discordapp.com/users/${user.id}/)**`).setColor("#FFFFFF");
+    
+                message.channel.send({embeds: [embed]});
+                connection.end();
             });
-
-            connection.end();
         });
     }
 }

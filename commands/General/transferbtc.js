@@ -1,3 +1,5 @@
+const { MessageEmbed } = require('discord.js');
+
 module.exports = {
     name: "transferbtc",
     ownerOnly: false,
@@ -15,7 +17,11 @@ module.exports = {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
-        if(user.id == client.user.id) return message.reply("You can't transfer Bitcoins to BOT.").then(repliedMessage => {
+        if(user.id == client.user.id) return message.reply("You can't transfer BTC to BOT.").then(repliedMessage => {
+            setTimeout(() => repliedMessage.delete(), 5000);
+        }).catch(err => console.error(err));
+        
+        if(user.id == message.author.id) return message.reply("You can't transfer BTC to yourself.").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
@@ -23,7 +29,7 @@ module.exports = {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
-        if(!amount || isNaN(amount) || amount < 0 || amount > 999.99999999) return message.reply("You must enter the value to transfer (ONLY NUMBERS BETWEEN 1 AND 999.99999999).").then(repliedMessage => {
+        if(!amount || isNaN(amount) || amount < 0.00000001 || amount > 999.99999999) return message.reply("You must enter the value to transfer (ONLY NUMBERS BETWEEN 0.00000001 AND 999.99999999).").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
         }).catch(err => console.error(err));
 
@@ -81,10 +87,11 @@ module.exports = {
                     if (err) throw err;
                 });
 
-                message.reply(`Transfered **${amount} BTC** to **${user}**`)
+                const embed = new MessageEmbed().setDescription(`**[\nTransfered \`\`\`yaml\n${parseFloat(amount).toFixed(8)} BTC\`\`\` to ${user.user.tag}](https://discordapp.com/users/${user.id}/)**`).setColor("#FFFFFF");
+    
+                message.channel.send({embeds: [embed]});
+                connection.end();
             });
-
-            connection.end();
         });
     }
 }
