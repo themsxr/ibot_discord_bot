@@ -103,8 +103,8 @@ client.on("ready", () => {
         const btcembed = new MessageEmbed();
         const usdembed = new MessageEmbed();
 
-        btcembed.setTitle("TOP 5 Users - BTC")
-        usdembed.setTitle("TOP 5 Users - USD")
+        btcembed.setTitle("TOP 5 Users - BTC").setColor("#FFFFFF").setTimestamp()
+        usdembed.setTitle("TOP 5 Users - USD").setColor("#FFFFFF").setTimestamp()
 
         connection.query(sql, function (err, result) {
             if (err) throw err;
