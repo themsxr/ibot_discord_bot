@@ -66,7 +66,7 @@ module.exports = {
                     setTimeout(() => repliedMessage.delete(), 5000);
                 }).catch(err => console.error(err));
 
-                chkbtc = parseFloat(userbtcs) + parseFloat(authorbtcs);
+                chkbtc = parseFloat(userbtcs) + parseFloat(amount);
                 tormbtc = parseFloat(authorbtcs) - parseFloat(amount);
                 
                 if(chkbtc > 999.99999999) 

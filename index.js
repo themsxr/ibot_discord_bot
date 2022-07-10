@@ -39,7 +39,7 @@ process.on("unhandledRejection", (reason, promise) => {
 });
 
 
-client.on("ready", (client) => {
+client.on("ready", () => {
     setInterval(() => {
         setTimeout(function () {
             require('child_process').fork('./btc.js');
@@ -86,6 +86,66 @@ client.on("ready", (client) => {
         });
 
     }, 300000);
+    
+    setInterval(() => {
+        var mysql = require('mysql');
+        var connection = mysql.createConnection({
+            host     : 'localhost',
+            user     : 'eddy',
+            password : 'TheYellowDik1!',
+            database : 'discord'
+        });
+        connection.connect();
+
+        var sql = `SELECT * FROM USERS ORDER BY uBitcoin DESC LIMIT 5`;
+        var sql2 = `SELECT * FROM USERS ORDER BY uUSD DESC LIMIT 5`;
+
+        const btcembed = new MessageEmbed();
+        const usdembed = new MessageEmbed();
+
+        btcembed.setTitle("TOP 5 Users - BTC")
+        usdembed.setTitle("TOP 5 Users - USD")
+
+        connection.query(sql, function (err, result) {
+            if (err) throw err;
+
+            for (var i = 0; i < 5; i++)
+            {
+                if (result[i] === undefined) 
+                {
+                    break;
+                }
+                let User = client.users.cache.get(result[i].userID);
+                var usrname = User.tag;
+                if (!User) var usrname = "User left";
+
+                btcembed.addField(`**${usrname}**`, `\`\`\`yaml\n${parseFloat(result[i].uBitcoin).toFixed(8)} BTC\`\`\``, false)
+            }
+
+            connection.query(sql2, function (err, res) {
+                if (err) throw err;
+
+                for (var i = 0; i < 5; i++)
+                {
+                    if (res[i] === undefined) 
+                    {
+                        break;
+                    }
+                    let User = client.users.cache.get(res[i].userID);
+                    var usrname = User.tag;
+                    if (!User) var usrname = "User left";
+
+                    usdembed.addField(`**${usrname}**`, `\`\`\`yaml\n${parseFloat(res[i].uUSD).toFixed(2)} USD\`\`\``, false)
+                }
+
+                const guild = client.guilds.cache.get('853046031843065856');
+                let rankchannel = guild.channels.cache.get('995220028863553576');
+
+                rankchannel.send({embeds: [btcembed, usdembed]});
+                connection.end();
+            });            
+        });
+    }, 86400000);
 });
 
 client.on("messageCreate", message => {

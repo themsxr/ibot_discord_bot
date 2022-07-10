@@ -66,7 +66,7 @@ module.exports = {
                     setTimeout(() => repliedMessage.delete(), 5000);
                 }).catch(err => console.error(err));
 
-                chkusd = parseFloat(userusds) + parseFloat(authorusds);
+                chkusd = parseFloat(userusds) + parseFloat(amount);
                 tormusd = parseFloat(authorusds) - parseFloat(amount);
                 
                 if(chkusd > 99999999.99) 
