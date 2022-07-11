@@ -1,6 +1,7 @@
 var fs = require('fs');
 const { NULL } = require('mysql/lib/protocol/constants/types');
 let profile_db = require("../../localdbs/profile_usrs.json");
+let users_db = require("../../cryptogame_files/users_db.json");
 
 module.exports = {
     name: "verify",
@@ -45,6 +46,28 @@ module.exports = {
                             }
                             
                             fs.writeFile("./localdbs/profile_usrs.json", JSON.stringify(profile_db), (err) => {
+                                if (err) {
+                                    message.reply("ERROR, Contact with our Discord Moderator!").then(repliedMessage => {
+                                        setTimeout(() => repliedMessage.delete(), 5000);
+                                      }).catch(err => console.error(err));
+                                    return console.log(err);
+                                }
+                            });
+                        }
+                        if(!users_db[message.author.id])
+                        {
+                            users_db[message.author.id] = {
+                                
+                                    CPU: NULL,
+                                    GPU: NULL,
+                                    GPU_A: NULL,
+                                    RAM: NULL,
+                                    POWER: NULL,
+                                    MOTHERBOARD: NULL,
+                                    MINERS: 1
+                            }
+                            
+                            fs.writeFile("./cryptogame_files/users_db.json", JSON.stringify(users_db), (err) => {
                                 if (err) {
                                     message.reply("ERROR, Contact with our Discord Moderator!").then(repliedMessage => {
                                         setTimeout(() => repliedMessage.delete(), 5000);
