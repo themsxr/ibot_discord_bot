@@ -58,12 +58,12 @@ module.exports = {
                         {
                             users_db[message.author.id] = {
                                 
-                                    CPU: NULL,
-                                    GPU: NULL,
-                                    GPU_A: NULL,
-                                    RAM: NULL,
-                                    POWER: NULL,
-                                    MOTHERBOARD: NULL,
+                                    CPU: 0,
+                                    GPU: 0,
+                                    GPU_A: 0,
+                                    RAM: 0,
+                                    POWER: 0,
+                                    MOTHERBOARD: 0,
                                     MINERS: 1
                             }
                             

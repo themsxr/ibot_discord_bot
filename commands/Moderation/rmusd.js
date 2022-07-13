@@ -57,9 +57,9 @@ module.exports = {
             if(rmusd < 0) rmusd = 0;
 
             var sqladd = `UPDATE USERS SET uUSD=${rmusd} WHERE userID=${user.id}`;
-                connection.query(sqladd, function (err, result) {
-                    if (err) throw err;
-                });
+            connection.query(sqladd, function (err, result) {
+                if (err) throw err;
+            });
 
             message.reply(`Removed **${amount} USD** from ${user}`).then(repliedMessage => {
                 setTimeout(() => repliedMessage.delete(), 5000);

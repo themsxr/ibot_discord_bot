@@ -57,9 +57,9 @@ module.exports = {
             if(addusd > 100000000) addusd = 99999999.99;
 
             var sqladd = `UPDATE USERS SET uUSD=${addusd} WHERE userID=${user.id}`;
-                connection.query(sqladd, function (err, result) {
-                    if (err) throw err;
-                });
+            connection.query(sqladd, function (err, result) {
+                if (err) throw err;
+            });
 
             message.reply(`Added **${amount} USD** to ${user}`).then(repliedMessage => {
                 setTimeout(() => repliedMessage.delete(), 5000);

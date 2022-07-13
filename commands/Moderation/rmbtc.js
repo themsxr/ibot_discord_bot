@@ -57,9 +57,9 @@ module.exports = {
             if(rmbtc < 0) rmbtc = 0;
 
             var sqladd = `UPDATE USERS SET uBitcoin=${rmbtc} WHERE userID=${user.id}`;
-                connection.query(sqladd, function (err, result) {
-                    if (err) throw err;
-                });
+            connection.query(sqladd, function (err, result) {
+                if (err) throw err;
+            });
 
             message.reply(`Removed **${amount} BTC** from ${user}`).then(repliedMessage => {
                 setTimeout(() => repliedMessage.delete(), 5000);

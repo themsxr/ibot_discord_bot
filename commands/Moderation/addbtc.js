@@ -57,9 +57,9 @@ module.exports = {
             if(addbtc > 1000) addbtc = 999.99999999;
 
             var sqladd = `UPDATE USERS SET uBitcoin=${addbtc} WHERE userID=${user.id}`;
-                connection.query(sqladd, function (err, result) {
-                    if (err) throw err;
-                });
+            connection.query(sqladd, function (err, result) {
+                if (err) throw err;
+            });
 
             message.reply(`Added **${amount} BTC** to ${user}`).then(repliedMessage => {
                 setTimeout(() => repliedMessage.delete(), 5000);
