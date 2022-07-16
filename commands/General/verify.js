@@ -63,6 +63,7 @@ module.exports = {
                                     GPU_A: 0,
                                     RAM: 0,
                                     POWER: 0,
+                                    POWER_A: 0,
                                     MOTHERBOARD: 0,
                                     MINERS: 1
                             }

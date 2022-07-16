@@ -7,6 +7,10 @@ module.exports = {
     name: "profile",
     ownerOnly: false,
     run: async (client, message, args) => {
+        if(cooldown.has(message.author.id)) return message.reply("You need to wait 10 seconds before using this command again.").then(repliedMessage => {
+            setTimeout(() => repliedMessage.delete(), 5000);
+        }).catch(err => console.error(err));
+
         const user = message.mentions.members.first() || message.member;
         if(user.bot) return message.reply("You can't display bot's profile.").then(repliedMessage => {
             setTimeout(() => repliedMessage.delete(), 5000);
@@ -92,5 +96,10 @@ module.exports = {
 
             connection.end();
         });
+
+        cooldown.add(message.author.id);
+        setTimeout(() => {
+             cooldown.delete(message.author.id)
+        }, 10000);
     },
 };

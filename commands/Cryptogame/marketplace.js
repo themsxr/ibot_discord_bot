@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
 
 module.exports = {
     name: "marketplace",
@@ -7,8 +7,16 @@ module.exports = {
 
         const arrowright = ":arrow_right:"
 
-        const embed = new MessageEmbed().setColor("#FFFFFF").setDescription(`**VISIT ${arrowright} [MARKETPLACE](https://www.eyethecreator.com/discord/marketplace)**`).addField("How to buy from marketplace?", "`Use: !buy [ITEM ID]`");
+        const row = new MessageActionRow()
+        .addComponents(
+          new MessageButton()
+          .setLabel("MARKETPLACE")
+          .setURL("https://www.eyethecreator.com/discord/marketplace")
+          .setStyle("LINK")
+        );
+
+        const embed = new MessageEmbed().setColor("#FFFFFF").addField("How to buy from marketplace?", "`Use: !buyitem [ITEM ID]`");
     
-        message.channel.send({embeds: [embed]});
+        message.channel.send({embeds: [embed], components: [row]});
     }
 }
